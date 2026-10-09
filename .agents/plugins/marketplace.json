@@ -1,0 +1,12 @@
+{
+  "name": "btcs-quad-report",
+  "interface": {"displayName": "BTCS Quad Report"},
+  "plugins": [
+    {
+      "name": "quad-report",
+      "source": {"source": "local", "path": "./plugins/quad-report"},
+      "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+      "category": "Productivity"
+    }
+  ]
+}

@@ -16,7 +16,12 @@ the rest of your drive.
 
 ## 2. Open the Quad Report in the AI you use
 
-- **ChatGPT:** open the Quad Report GPT link from the email. That's it.
+- **ChatGPT:** unzip the ChatGPT pack from the email and follow its
+  `SETUP.md`: turn off model training in Settings > Data controls, create a
+  Project called Quad Report, paste in the instructions and upload the files.
+  About five minutes, and it stays private to your account. On the ChatGPT
+  desktop app you can instead add the plugin marketplace
+  `jessica-btcs/quad-report`.
 - **Claude desktop:** open **Customize**, then **Plugins**. Click **Add
   marketplace** and paste `jessica-btcs/quad-report`. Everyone uses this same
   address; you don't need a GitHub account or a copy of your own. Install
@@ -59,9 +64,8 @@ yourself and take it to the meeting.
 
 ## Updates
 
-On ChatGPT, updates arrive on their own. On Claude desktop they do too, once
-Sync automatically is on. On Claude on the
-web and Copilot, you'll get an email with the new file. Your Quad Report Data
-folder is never touched by an update.
+On Claude desktop, updates arrive on their own once Sync automatically is
+on. On ChatGPT, Claude on the web and Copilot, you'll get an email with the
+new files. Your Quad Report Data folder is never touched by an update.
 
 The Quad Report format is © Sherpa Alliance, 2004, used with permission.

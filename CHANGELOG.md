@@ -3,6 +3,14 @@
 Written for the owner, not for developers. Each entry says what changed and
 whether they need to do anything.
 
+## 1.0.2
+
+- ChatGPT is retiring custom GPTs, so on ChatGPT the Quad Report now lives
+  in a Project you set up once from the ChatGPT pack. It stays private to
+  your account. On the ChatGPT desktop app you can install it as a plugin
+  instead, and it updates from the source like the Claude version.
+- If you use ChatGPT: follow the SETUP.md in the new ChatGPT pack.
+
 ## 1.0.1
 
 - Setup now asks for the exact exports up front: your P&L by month for the

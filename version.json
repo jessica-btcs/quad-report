@@ -1,4 +1,4 @@
 {
-  "version": "1.0.1",
-  "notes": "Setup now asks for the exact exports up front: your P&L by month for the last 12 months on accrual basis, last month's balance sheet, and your time or job costing system if you have one, with examples of what counts."
+  "version": "1.0.2",
+  "notes": "ChatGPT is retiring custom GPTs, so on ChatGPT the Quad Report now lives in a Project you set up once from the ChatGPT pack. It stays private to your account. On the ChatGPT desktop app you can install it as a plugin instead, and it updates from the source like the Claude version."
 }

@@ -10,7 +10,7 @@ Everything in dist/ is generated from it, so the platforms never drift apart:
     dist/v1.0.0/
       claude-plugin/        nothing to upload; members get it from the GitHub marketplace
       claude-ai/            quad-report-skill-v1.0.0.zip   (Settings > upload a skill)
-      chatgpt/              instructions.md + knowledge/   (paste into the shared GPT)
+      chatgpt/              Quad-Report-ChatGPT-v1.0.0.zip (members build a ChatGPT Project from it)
       copilot/              instructions.md + knowledge/ + blank template
       member/               Quad-Report-Data-starter.zip + the quickstart
       RELEASE-NOTES.md      the CHANGELOG entry, for the release email
@@ -64,6 +64,8 @@ def sync_versions(version, rel):
     pj = os.path.join(ROOT, "plugins", "quad-report", ".claude-plugin", "plugin.json")
     mj = os.path.join(ROOT, ".claude-plugin", "marketplace.json")
     p = json.loads(rd(pj)); p["version"] = version; wr(pj, json.dumps(p, indent=2) + "\n")
+    oj = os.path.join(ROOT, "plugins", "quad-report", "plugin.json")  # ChatGPT desktop / Codex manifest
+    o = json.loads(rd(oj)); o["version"] = version; wr(oj, json.dumps(o, indent=2) + "\n")
     m = json.loads(rd(mj))
     for pl in m["plugins"]:
         pl.pop("version", None)  # plugin.json carries the version; Claude's docs say set it in one place
@@ -131,20 +133,37 @@ def main():
     os.makedirs(os.path.join(dist, "claude-ai"))
     zip_dir(files, os.path.join(dist, "claude-ai", f"quad-report-skill-v{version}.zip"), "quad-report")
 
-    # ChatGPT and Copilot: instructions plus a flat knowledge folder.
-    for plat in ("chatgpt", "copilot"):
-        k = os.path.join(dist, plat, "knowledge")
-        os.makedirs(k)
+    # ChatGPT (a Project each member builds) and Copilot (an agent): instructions
+    # plus a flat folder of files, because neither keeps folder structure.
+    def flat(dest):
+        os.makedirs(dest)
         for full, rel_path in files:
             name = os.path.basename(rel_path)
             if name == "VERSION":
                 name = "VERSION.txt"  # ChatGPT and Copilot reject files with no extension
-            if os.path.exists(os.path.join(k, name)):
-                die(f"two skill files are both called {name}; the flat {plat} knowledge folder needs unique names")
-            shutil.copy(full, os.path.join(k, name))
-        shutil.copy(os.path.join(ROOT, "platforms", plat, "instructions.md"), os.path.join(dist, plat))
-        if len(rd(os.path.join(ROOT, "platforms", plat, "instructions.md"))) > 7500:
-            die(f"platforms/{plat}/instructions.md is over 7,500 characters; GPT and Copilot agents cap instructions near 8,000")
+            if os.path.exists(os.path.join(dest, name)):
+                die(f"two skill files are both called {name}; the flat upload folder needs unique names")
+            shutil.copy(full, os.path.join(dest, name))
+        return len(os.listdir(dest))
+
+    for src in ("platforms/chatgpt/project-instructions.md", "platforms/copilot/instructions.md"):
+        if len(rd(os.path.join(ROOT, src))) > 7500:
+            die(f"{src} is over 7,500 characters; Projects and Copilot agents cap instructions near 8,000")
+
+    with tempfile.TemporaryDirectory() as td:
+        pack = os.path.join(td, "Quad Report for ChatGPT")
+        count = flat(os.path.join(pack, "files"))
+        shutil.copy(os.path.join(ROOT, "platforms", "chatgpt", "project-instructions.md"),
+                    os.path.join(pack, "project-instructions.txt"))
+        wr(os.path.join(pack, "SETUP.md"),
+           rd(os.path.join(ROOT, "platforms", "chatgpt", "SETUP.md")).replace("{count}", str(count)))
+        os.makedirs(os.path.join(dist, "chatgpt"))
+        pairs = [(os.path.join(b, f), os.path.relpath(os.path.join(b, f), pack))
+                 for b, _, fs in os.walk(pack) for f in fs]
+        zip_dir(pairs, os.path.join(dist, "chatgpt", f"Quad-Report-ChatGPT-v{version}.zip"), "Quad Report for ChatGPT")
+
+    flat(os.path.join(dist, "copilot", "knowledge"))
+    shutil.copy(os.path.join(ROOT, "platforms", "copilot", "instructions.md"), os.path.join(dist, "copilot"))
 
     # Copilot gets a blank slide to type into, since it cannot run the generator.
     blank = json.loads(rd(os.path.join(SKILL, "examples", "sample-config.json")))
@@ -178,8 +197,9 @@ def main():
     print("  update check: " + (f"on ({url})" if url else "off (set github_repo in release.json to turn it on)"))
     print("\nTo publish:")
     print(f"  1. git add -A && git commit -m \"Quad Report {version}\" && git tag v{version} && git push -u origin main --tags")
-    print("  2. ChatGPT: in the shared GPT, replace Knowledge with dist/.../chatgpt/knowledge/* and paste instructions.md")
-    print("  3. claude.ai and Copilot members: send the release email with RELEASE-NOTES.md and the zip / Copilot pack")
+    print("  2. Claude and ChatGPT desktop plugin members: nothing to send; the push is the update")
+    print("  3. Everyone else: send the release email with RELEASE-NOTES.md and their pack:")
+    print("     claude.ai zip, ChatGPT Project zip, or Copilot pack")
 
 
 if __name__ == "__main__":

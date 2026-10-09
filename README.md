@@ -9,6 +9,8 @@ never see this folder; they get packages built from it.
 plugins/quad-report/skills/quad-report/   THE skill. The only place to edit the method.
   VERSION                                 bump on every release (tools/release.py --bump)
 .claude-plugin/marketplace.json           makes this repo a Claude plugin marketplace
+.agents/plugins/marketplace.json          ...and a ChatGPT desktop / Codex one
+plugins/quad-report/plugin.json           ChatGPT plugin manifest (version synced by release.py)
 platforms/chatgpt|copilot/instructions.md the short instructions for each platform
 data-template/                            the empty "Quad Report Data" folder members get
 member-docs/QUICKSTART.md                 what members read
@@ -38,7 +40,8 @@ How each platform gets the update:
 
 | Platform | Member installs | Update reaches them |
 |---|---|---|
-| ChatGPT | the shared GPT link | you replace its knowledge and instructions once |
+| ChatGPT (web) | builds a Project from the ChatGPT pack | release email with the new pack |
+| ChatGPT desktop / Codex | plugin from this repo (`.agents/plugins/marketplace.json`) | push a tag |
 | Claude desktop / Code | plugin from this repo's marketplace | push a tag; the marketplace serves it |
 | claude.ai | uploads the skill zip | release email with the new zip |
 | Copilot | Copilot agent with the Copilot pack | release email with the new pack |

@@ -12,8 +12,11 @@ version is out, tell them the one line that matches where they run it:
 - **claude.ai (uploaded skill):** download the new skill zip from the link
   in the release email, then in Customize > Skills upload it in place of the
   old one.
-- **ChatGPT (the shared Quad Report GPT):** nothing to do. The GPT is updated
-  in one place and everyone has it in their next chat.
+- **ChatGPT (a Quad Report Project):** delete the old files from the
+  Project, upload the new pack's `files` folder, and paste in the new
+  `project-instructions.txt`.
+- **ChatGPT desktop app or Codex (plugin):** updates arrive from the
+  `jessica-btcs/quad-report` marketplace.
 - **Copilot:** replace the files in their Copilot agent's knowledge with the
   new Copilot pack.
 
