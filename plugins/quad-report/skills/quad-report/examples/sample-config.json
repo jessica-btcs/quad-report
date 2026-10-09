@@ -1,0 +1,68 @@
+{
+  "year": 2026,
+  "theme": "Earn the Right to Grow",
+  "report_by": "Sample Owner, Meridian Works",
+  "period": "September 2026",
+  "date": "2026-10-15",
+  "vision": "2029: $4M, two operating units, owner out of delivery",
+  "label_overrides": {
+    "q1": ["How We Did", "September, costed on hours actually worked"]
+  },
+  "kpis": [
+    {"name": "Revenue", "unit": "$", "why": "The top line everything else sits on",
+     "actual": 318400, "target": 300000, "higher_is_better": true,
+     "trend": {"direction": "up", "label": "rising", "months": 3},
+     "status": "Per the billing tracker, by work month. Q3 averaged $304K."},
+    {"name": "Gross Margin", "unit": "%", "why": "Whether growth is worth having",
+     "actual": 41.2, "target": 44.0, "higher_is_better": true,
+     "trend": {"direction": "down", "label": "falling"},
+     "status": "Subcontract crews were 61% of field hours in September."},
+    {"name": "Overhead", "unit": "$", "why": "True fixed cost, delivery removed",
+     "actual": 94500, "target": 98000, "higher_is_better": false,
+     "trend": {"direction": "flat", "label": "steady"},
+     "status": "Two open roles still unfilled, which is why this reads low."},
+    {"name": "Net Profit", "unit": "$", "why": "Whether the month paid for itself",
+     "actual": 36600, "target": 34000, "higher_is_better": true,
+     "trend": {"direction": "up", "label": "rising"},
+     "status": "First month above plan since April."},
+    {"name": "Cash Reserve", "unit": "mo", "why": "The buffer that lets us say no",
+     "actual": 2.8, "target": 4.0, "higher_is_better": true,
+     "trend": {"direction": "up", "label": "rising"},
+     "status": "$264,600 against $94,500 of monthly fixed overhead."}
+  ],
+  "breakthrough_goals": [
+    {"theme": "Win work that fits", "flag": null, "stalled_months": null,
+     "bullets": ["Close 2026 at $3.6M with no client over 30%. Largest is 34% today.",
+                 "Three signed service agreements. Two signed, one in legal."]},
+    {"theme": "Build the field bench", "flag": "stalled", "stalled_months": 2,
+     "bullets": ["Two crew leads hired and certified by December. None hired.",
+                 "Subcontract hours under 40% of field time. Running 61%."]},
+    {"theme": "Make the office boring", "flag": null, "stalled_months": null,
+     "bullets": ["Close the books by the 5th. Hit it in July, August, September.",
+                 "One system of record for jobs. Migration 60% complete."]},
+    {"theme": "Give back where we work", "flag": null, "stalled_months": null,
+     "bullets": ["2% of profit to the regional trades scholarship fund.",
+                 "$14,200 committed this year, four apprentices sponsored."]}
+  ],
+  "core_strategies": [
+    {"text": "Turning one-off jobs into agreements", "flag": null},
+    {"text": "Hiring and certifying crew leads", "flag": "stalled"},
+    {"text": "Pricing off real job cost, not gut", "flag": null},
+    {"text": "Closing the books by the 5th", "flag": null},
+    {"text": "Winning outside the top two clients", "flag": null},
+    {"text": "Getting the owner out of estimating", "flag": null}
+  ],
+  "strategy_status": {
+    "accomplishments": ["Books closed on the 4th, third month running.",
+                        "Second service agreement signed, $420K over 3 years.",
+                        "Job costing live on every job since August 1."],
+    "shortfalls": ["No crew leads hired, two months into the search.",
+                   "Subcontract hours 61% of field time against a 40% target.",
+                   "Largest client still 34% of revenue."],
+    "process": "Estimating still comes through me. The template exists; nobody else has used it yet."
+  },
+  "other": {
+    "think": [], "questions": [], "decisions": [], "actions": [],
+    "call_topics": []
+  }
+}

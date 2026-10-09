@@ -1,0 +1,5 @@
+{
+  "github_repo": "jessica-btcs/quad-report",
+  "branch": "main",
+  "_note": "github_repo turns on the update check: the skill compares its VERSION with version.json on this repo."
+}

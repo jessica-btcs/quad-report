@@ -1,0 +1,15 @@
+{
+  "name": "btcs-quad-report",
+  "owner": {
+    "name": "BTCS Group",
+    "url": "https://btcsgroup.com"
+  },
+  "plugins": [
+    {
+      "name": "quad-report",
+      "source": "./plugins/quad-report",
+      "description": "Builds your monthly Vistage Quad Report one-pager from your own financials and time records.",
+      "version": "1.0.0"
+    }
+  ]
+}

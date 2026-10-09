@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Quad Report config",
+  "type": "object",
+  "required": ["year", "report_by", "period", "kpis"],
+  "properties": {
+    "year": {"type": "integer"},
+    "theme": {"type": "string", "description": "Annual theme, shown beside the title"},
+    "report_by": {"type": "string"},
+    "period": {"type": "string", "description": "The period this report covers, e.g. 'September 2026'"},
+    "date": {"type": "string", "description": "Meeting date, YYYY-MM-DD"},
+    "vision": {"type": "string", "description": "One-line multi-year vision, shown in the header"},
+    "labels": {"enum": ["plain", "classic"], "default": "plain"},
+    "label_overrides": {
+      "type": "object",
+      "description": "Replace any label. Quadrant keys take [title, subtitle].",
+      "additionalProperties": true
+    },
+    "kpis": {
+      "type": "array", "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["name", "unit", "actual", "target"],
+        "properties": {
+          "name": {"type": "string"},
+          "unit": {"type": "string", "description": "$, %, #, or a suffix such as 'mo'"},
+          "why": {"type": "string", "description": "Why this KPI is tracked. Not rendered; kept for the profile."},
+          "actual": {"type": ["number", "null"]},
+          "target": {"type": ["number", "null"]},
+          "higher_is_better": {"type": "boolean", "default": true},
+          "trend": {
+            "type": "object",
+            "properties": {
+              "direction": {"enum": ["up", "down", "flat"]},
+              "label": {"type": "string"},
+              "months": {"type": "integer"}
+            }
+          },
+          "status": {"type": "string", "maxLength": 84, "description": "Why the number is what it is. Name the source."}
+        }
+      }
+    },
+    "breakthrough_goals": {
+      "type": "array", "maxItems": 4,
+      "items": {
+        "type": "object",
+        "properties": {
+          "theme": {"type": "string", "maxLength": 44},
+          "bullets": {"type": "array", "maxItems": 2, "items": {"type": "string", "maxLength": 88}},
+          "goal": {"type": "string", "maxLength": 72, "description": "Alternative to theme+bullets: a single SMART goal"},
+          "status": {"type": "string", "maxLength": 84},
+          "flag": {"enum": ["stalled", "done", null]},
+          "stalled_months": {"type": ["integer", "null"]}
+        }
+      }
+    },
+    "core_strategies": {
+      "type": "array", "maxItems": 6,
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {"type": "string", "maxLength": 40},
+          "flag": {"enum": ["stalled", null]}
+        }
+      }
+    },
+    "strategy_status": {
+      "type": "object",
+      "properties": {
+        "accomplishments": {"type": "array", "maxItems": 3, "items": {"type": "string", "maxLength": 58}},
+        "shortfalls": {"type": "array", "maxItems": 3, "items": {"type": "string", "maxLength": 58}},
+        "process": {"type": "string", "maxLength": 86}
+      }
+    },
+    "other": {
+      "type": "object",
+      "description": "Quadrant iv. Ships EMPTY by design. The owner writes this; the agent must not.",
+      "properties": {
+        "think": {"type": "array", "maxItems": 2, "items": {"type": "string", "maxLength": 84}},
+        "questions": {"type": "array", "maxItems": 2, "items": {"type": "string", "maxLength": 84}},
+        "decisions": {"type": "array", "maxItems": 2, "items": {"type": "string", "maxLength": 84}},
+        "actions": {"type": "array", "maxItems": 2, "items": {"type": "string", "maxLength": 84}},
+        "call_topics": {"type": "array", "maxItems": 3, "items": {"type": "string", "maxLength": 30}}
+      }
+    }
+  }
+}

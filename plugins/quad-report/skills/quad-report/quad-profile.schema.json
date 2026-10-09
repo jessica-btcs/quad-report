@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Quad Report profile",
+  "description": "The owner's company, metric definitions, targets, goals and connections. Lives in the owner's data folder as quad-profile.json, never in the skill folder.",
+  "type": "object",
+  "required": ["schema_version", "company", "meeting", "billing_models", "revenue_basis", "books", "time_system", "kpis", "output"],
+  "properties": {
+    "schema_version": {"type": "integer", "description": "Profile format version. quad_data.py status says when it is behind."},
+    "company": {
+      "type": "object",
+      "required": ["name", "report_by", "fiscal_year_start_month"],
+      "properties": {
+        "name": {"type": "string"},
+        "report_by": {"type": "string", "description": "Name as it appears on the slide"},
+        "fiscal_year_start_month": {"type": "integer", "minimum": 1, "maximum": 12},
+        "theme": {"type": "string", "description": "Annual theme, if they have one"},
+        "vision": {"type": "string", "description": "One-line multi-year vision, if they have one"}
+      }
+    },
+    "meeting": {
+      "type": "object",
+      "required": ["weekday", "week_of_month"],
+      "properties": {
+        "weekday": {"enum": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]},
+        "week_of_month": {"type": ["integer", "string"], "description": "1 to 4, or 'last'"}
+      }
+    },
+    "billing_models": {
+      "type": "array",
+      "items": {"enum": ["time_and_materials", "fixed_fee", "milestone", "deposit_or_retainer", "subscription", "product_sales"]}
+    },
+    "revenue_basis": {"enum": ["earned", "invoiced", "collected"]},
+    "work_month_mapping": {"type": "string", "description": "Where the invoice-to-work-month mapping lives: billing tracker, SOWs, invoice sequence, or none yet"},
+    "books": {
+      "type": "object",
+      "required": ["platform", "salaried_delivery_in"],
+      "properties": {
+        "platform": {"type": "string", "description": "QuickBooks Online, Xero, NetSuite, upload, ..."},
+        "salaried_delivery_in": {"enum": ["cost_of_sales", "operating_expenses", "none"]},
+        "labor_lines": {"type": "array", "items": {"type": "string"}, "description": "Ledger accounts that hold labor, for the reconciliation"}
+      }
+    },
+    "time_system": {
+      "type": "object",
+      "required": ["platform"],
+      "properties": {
+        "platform": {"type": "string", "description": "Harvest, Toggl, a job-costing system, or none"},
+        "cost_rates_complete": {"type": ["boolean", "null"]},
+        "internal_projects": {"type": "array", "items": {"type": "string"}, "description": "Projects that carry no delivery cost against revenue"}
+      }
+    },
+    "people_on_client_work": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "type": {"enum": ["owner", "salaried", "hourly", "contractor"]},
+          "client_share": {"type": ["number", "null"], "description": "Rough share of their time on client work, 0 to 1"}
+        }
+      }
+    },
+    "kpis": {
+      "type": "array", "minItems": 1, "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["name", "unit", "definition", "target", "target_basis"],
+        "properties": {
+          "name": {"type": "string"},
+          "unit": {"type": "string"},
+          "definition": {"type": "string", "description": "Exactly how it is computed. Never redefined mid-year."},
+          "target": {"type": ["number", "null"]},
+          "target_basis": {"type": "string", "description": "The definition the target was set on. A KPI is only scored when this matches the definition."},
+          "target_in_their_words": {"type": "string"},
+          "higher_is_better": {"type": "boolean", "default": true},
+          "why": {"type": "string"}
+        }
+      }
+    },
+    "goals": {
+      "type": "array", "maxItems": 4,
+      "items": {"type": "object", "properties": {"theme": {"type": "string"}, "bullets": {"type": "array", "items": {"type": "string"}}, "goal": {"type": "string"}, "source": {"type": "string", "description": "Where it was lifted from, verbatim"}}}
+    },
+    "strategies": {"type": "array", "maxItems": 6, "items": {"type": "string"}},
+    "output": {
+      "type": "object",
+      "required": ["labels", "period"],
+      "properties": {
+        "labels": {"enum": ["plain", "classic"]},
+        "period": {"enum": ["month", "rolling_quarter"]}
+      }
+    },
+    "data_tier": {"enum": [0, 1, 2], "description": "0 uploaded P&L, 1 accounting connected, 2 accounting plus time system with cost rates"},
+    "connections": {"type": "object", "description": "What is connected and on which AI, e.g. {\"accounting\": \"QuickBooks connector\", \"time\": \"Harvest export upload\"}"},
+    "ai_platform": {"type": "string", "description": "Where they last ran it: Claude, ChatGPT, Copilot. Informational only."}
+  }
+}
