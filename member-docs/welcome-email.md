@@ -10,14 +10,14 @@ Your numbers stay yours. It runs in your own ChatGPT or Claude account against y
 
 **Getting set up**
 
-Everything is in this folder: [SHARED FOLDER LINK]. The one-page guide in there has the steps for each tool, and the short version is:
+Two attachments: a one-page guide with the steps for each tool, and a zip with everything else, sorted into a folder per tool. The short version is:
 
-1. Unzip Quad-Report-Data-starter.zip into your OneDrive, Google Drive or SharePoint. That's your Quad Report Data folder.
+1. Unzip the attachment and copy the Quad Report Data folder (in "Your data folder") into your OneDrive, Google Drive or SharePoint.
 2. Set it up in the tool you already use:
-   - **ChatGPT:** unzip the ChatGPT pack and follow its SETUP.md, about five minutes.
+   - **ChatGPT:** open the ChatGPT folder and follow its SETUP.md, about five minutes.
    - **Claude desktop:** open Customize, then Plugins, click Add marketplace, paste `jessica-btcs/quad-report`, install quad-report and turn on Sync automatically.
-   - **Claude on the web:** upload the skill zip under Customize, then Skills.
-   - **Copilot:** use the Copilot pack. Copilot can work out the numbers but can't build the slide, so if you also have ChatGPT or Claude, use that instead.
+   - **Claude on the web:** upload the zip in the "Claude on the web" folder under Customize, then Skills. Leave that one zipped.
+   - **Copilot:** use the Copilot folder. Copilot can work out the numbers but can't build the slide, so if you also have ChatGPT or Claude, use that instead.
 3. Say "set up my quad report."
 
 The setup interview takes 20 to 40 minutes and saves as it goes, so you can stop and come back. It's a lot easier with these nearby:
@@ -29,14 +29,14 @@ The setup interview takes 20 to 40 minutes and saves as it goes, so you can stop
 
 Fair warning, it will probably find something in your books on the first run. The most common one is salaried delivery time sitting in operating expenses, which makes gross margin look better than it is. I'd rather you find that at your desk than in the meeting.
 
-After that, each month is one line: "build my quad for September." It works out your trends and flags any goal that's been stuck for two months or more, using your own history, and then you write quadrant iv and bring it in.
+After that, each month starts with "build my quad for September." It pulls your numbers, then asks a few questions one at a time about how the month went, your wins, what slipped, and where each goal and strategy stands. You can answer out loud and ramble; it trims your words to fit and reads them back before it builds anything. It also works out your trends and flags any goal that's been stuck for two months or more, using your own history.
 
 **Updates**
 
-When I improve it, Claude desktop picks the update up on its own. For ChatGPT, Claude on the web and Copilot, I'll send a short note and the new files will be in the same folder link above. Your Quad Report Data folder is never touched by an update.
+When I improve it, Claude desktop picks the update up on its own. For ChatGPT, Claude on the web and Copilot, I'll send a short note with the new zip. Your Quad Report Data folder is never touched by an update.
 
 The Quad format is Scot Dietz's (© Sherpa Alliance, 2004), and he's given me the OK to share this with our group, so please keep it inside the group.
 
-If you get stuck anywhere, reply to this email and I'll help you through it.
+If the zip doesn't come through (some company email filters hold zips), or you get stuck anywhere, reply to this email and I'll help you through it.
 
 Jessica

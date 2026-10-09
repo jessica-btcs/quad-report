@@ -210,6 +210,28 @@ def main():
                 os.path.join(dist, f"Quad-Report-Copilot-v{version}.zip"),
                 os.path.join(dist, "RELEASE-NOTES.md")):
         shutil.copy(src, share)
+
+    # The email attachment: one zip, one folder per tool, nothing nested except
+    # the claude.ai skill zip, which has to stay a zip to be uploaded.
+    with tempfile.TemporaryDirectory() as td:
+        top = os.path.join(td, f"Quad Report {version}")
+        for sub, zpath in (("Your data folder (copy into OneDrive or Google Drive)",
+                            os.path.join(dist, "member", "Quad-Report-Data-starter.zip")),
+                           ("ChatGPT", os.path.join(dist, "chatgpt", f"Quad-Report-ChatGPT-v{version}.zip")),
+                           ("Copilot", os.path.join(dist, f"Quad-Report-Copilot-v{version}.zip"))):
+            with zipfile.ZipFile(zpath) as z:
+                z.extractall(os.path.join(top, sub))
+        os.makedirs(os.path.join(top, "Claude on the web"))
+        shutil.copy(os.path.join(dist, "claude-ai", f"quad-report-skill-v{version}.zip"),
+                    os.path.join(top, "Claude on the web"))
+        wr(os.path.join(top, "Claude desktop.txt"),
+           "Nothing to install from this zip. In Claude desktop open Customize > Plugins,\n"
+           "click Add marketplace, paste jessica-btcs/quad-report, install quad-report,\n"
+           "and turn on Sync automatically.\n")
+        shutil.copy(os.path.join(ROOT, "member-docs", "Quad-Report-Member-Guide.pdf"), top)
+        shutil.copy(os.path.join(dist, "RELEASE-NOTES.md"), top)
+        pairs = [(os.path.join(b, f), os.path.relpath(os.path.join(b, f), top)) for b, _, fs in os.walk(top) for f in fs]
+        zip_dir(pairs, os.path.join(share, f"Quad-Report-v{version}.zip"), f"Quad Report {version}")
     if url:
         first_item = notes.split("\n- ")[0].lstrip("- ")
         wr(os.path.join(ROOT, "version.json"),
