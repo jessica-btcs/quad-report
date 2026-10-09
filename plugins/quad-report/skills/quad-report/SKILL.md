@@ -93,7 +93,13 @@ on them.
 7. **Build** with
    `python3 build_quad.py config.json <data_dir>/out/YYYY-MM.pptx`.
    Quadrant iv renders with blank writing lines unless the owner dictated
-   their own words in the check-in.
+   their own words in the check-in. Every build ends with a layout check
+   (`layout_check.py`): every word inside its box, every box on the page. If
+   it prints LAYOUT CHECK FAILED (exit code 3), shorten exactly the items it
+   names, keeping the owner's meaning and every fact, and build again. Repeat
+   until it says clean. If an item cannot get shorter without losing
+   something that matters, ask the owner what to cut. This applies after
+   every edit the owner asks for, not just the first build.
 8. **QC.** Recompute every KPI from source and diff it against the config
    before handing anything over. Report the diff.
 9. **Archive** with
@@ -114,6 +120,10 @@ the .pptx after the script has built it. Any change the owner asks for, a
 number, a word, a label, goes into the config and the script runs again. If
 the script will not run, say so and fix that; do not hand over a slide you
 made another way.
+
+**Never hand over a slide that failed the layout check.** No words outside
+their box, nothing off the page, nothing cut off mid-sentence. Fix the text,
+not the layout.
 
 **The quadrant layout is correct as built. Do not rearrange it.** iv is top
 left, iii top right, i bottom left, ii bottom right, with the headings on the
@@ -187,6 +197,8 @@ note says which.
 ## Files in this folder
 
 - `build_quad.py`: the slide generator. Needs python-pptx and nothing else.
+- `layout_check.py`: measures every text box on a built slide against
+  Calibri's real character widths. build_quad.py runs it on every build.
 - `quad_data.py`: the data folder: status, migration check, trends and stall
   flags, archiving. Standard library only.
 - `quad-config.schema.json`: what a monthly config may contain.

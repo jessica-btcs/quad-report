@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4",
-  "notes": "Issue prep: when you name a topic for the group during the monthly check-in, it asks whether you want to prep an Opportunity / Issue Processing Form for it. Say yes and it walks you through the form's questions one at a time, reads it back, and hands you the finished form as a Word file, one page, in the same layout as the one we use. It never preps one you didn't ask for, and it never suggests options for you; that's the group's job."
+  "version": "1.0.5",
+  "notes": "Every slide is now checked before you get it: every word inside its box, nothing running off the page, nothing cut off mid-sentence. If something doesn't fit, it shortens that line (keeping what you said) and rebuilds, after every edit, not just the first one. If it can't shorten a line without losing something, it asks you what to cut."
 }

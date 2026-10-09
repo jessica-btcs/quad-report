@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Quad Report generator.
    python3 build_quad.py quad-config.json out.pptx"""
-import json, sys, textwrap
+import json, os, sys, textwrap
 try:
     from pptx import Presentation
 except ImportError:
@@ -95,10 +95,11 @@ def tbox(slide,l,t,w,h,pad=0.07,anchor=MSO_ANCHOR.TOP):
     tf.vertical_anchor = anchor
     return tf
 
-def P(tf,before=0,first=False,indent=0,align=PP_ALIGN.LEFT):
+def P(tf,before=0,first=False,indent=0,align=PP_ALIGN.LEFT,ls=None):
     p = tf.paragraphs[0] if first else tf.add_paragraph()
     p.alignment = align
     p.space_before = Pt(before); p.space_after = Pt(0)
+    if ls: p.line_spacing = Pt(ls)   # exact line height, for boxes with no spare room
     if indent:
         pPr = p._p.get_or_add_pPr()
         pPr.set('marL', str(int(Inches(indent)))); pPr.set('indent','0')
@@ -110,8 +111,8 @@ def R(p,text,size=T_BODY,bold=False,color=INK,italic=False):
     r.font.color.rgb = color; r.font.name = "Calibri"
 
 def line(tf,text,size=T_BODY,bold=False,color=INK,before=0,first=False,
-         italic=False,indent=0,align=PP_ALIGN.LEFT):
-    R(P(tf,before,first,indent,align),text,size,bold,color,italic)
+         italic=False,indent=0,align=PP_ALIGN.LEFT,ls=None):
+    R(P(tf,before,first,indent,align,ls),text,size,bold,color,italic)
 
 def rect(slide,l,t,w,h,fill=None,line_col=None,lw=0.75):
     s = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE,l,t,w,h)
@@ -311,11 +312,11 @@ def q4(slide,box,cfg):
             # writing lines rather than generating plausible-sounding content.
             for j in range(2):
                 line(tf,"\u2022  "+"\u00a0"*46,T_BODY,color=RULE,
-                     before=0 if j==0 else 2,first=(j==0))
+                     first=(j==0),ls=11.3)
         first=True
         for it in items:
             line(tf,"\u2022  "+clamp(it,CAP["other"]),T_BODY,
-                 before=0 if first else 2,first=first); first=False
+                 first=first,ls=11.3); first=False
     ys = t + 4*BH
     rect(slide,l+Inches(0.04),ys,w-Inches(0.08),Inches(0.008),RULE,None)
     tf = tbox(slide,l,ys+Inches(0.02),w,Inches(0.22),pad=0.05)
@@ -393,3 +394,17 @@ if __name__=="__main__":
         print("Warnings:", file=sys.stderr)
         for w in dict.fromkeys(WARN): print("  - "+w, file=sys.stderr)
     print(f"wrote {sys.argv[2]}  ({len(dict.fromkeys(WARN))} warning(s))")
+
+    # Layout check on every build: every word inside its box, every box on the page.
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from layout_check import check
+    problems = check(sys.argv[2])
+    truncated = [w for w in dict.fromkeys(WARN) if w.startswith("truncated")]
+    if problems or truncated:
+        print("\nLAYOUT CHECK FAILED. Shorten these and build again; do not hand this slide over:")
+        for p in problems:
+            print(f"  - {p['where']}: \"{p['text'][:50]}\" ... {p['problem']}")
+        for w in truncated:
+            print(f"  - cut off mid-sentence: {w}")
+        sys.exit(3)
+    print("layout check: clean (every word fits its box, nothing off the page)")

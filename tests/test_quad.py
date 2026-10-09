@@ -32,6 +32,19 @@ class Generator(unittest.TestCase):
             for must in ("Quad Report 2026", "Revenue", "Sherpa Alliance", "What's On My Mind"):
                 self.assertIn(must, text)
 
+    def test_layout_check_passes_sample_and_refuses_overflow(self):
+        cfg = json.load(open(SAMPLE, encoding="utf-8"))
+        long = ("Measured the warehouse workflow with the operations manager team weekly " * 3)[:58]
+        cfg["strategy_status"]["accomplishments"] = [long] * 3
+        with tempfile.TemporaryDirectory() as d:
+            c, out = os.path.join(d, "c.json"), os.path.join(d, "q.pptx")
+            json.dump(cfg, open(c, "w", encoding="utf-8"))
+            p = run(os.path.join(SKILL, "build_quad.py"), c, out, ok=(3,))
+            self.assertIn("LAYOUT CHECK FAILED", p.stdout)
+            self.assertIn("quadrant iii", p.stdout)
+            self.assertIn("layout check: clean",
+                          run(os.path.join(SKILL, "build_quad.py"), SAMPLE, out).stdout)
+
     def test_done_flag_renders(self):
         from pptx import Presentation
         cfg = json.load(open(SAMPLE, encoding="utf-8"))

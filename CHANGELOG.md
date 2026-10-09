@@ -3,6 +3,17 @@
 Written for the owner, not for developers. Each entry says what changed and
 whether they need to do anything.
 
+## 1.0.5
+
+- Every slide is now checked before you get it: every word inside its box,
+  nothing running off the page, nothing cut off mid-sentence. If something
+  doesn't fit, it shortens that line (keeping what you said) and rebuilds,
+  after every edit, not just the first one. If it can't shorten a line
+  without losing something, it asks you what to cut.
+- Quadrant iv's lines sit a little tighter so dictated thoughts never touch
+  the next heading.
+- Nothing for you to do.
+
 ## 1.0.4
 
 - Issue prep: when you name a topic for the group during the monthly
