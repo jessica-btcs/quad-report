@@ -8,8 +8,7 @@
     {
       "name": "quad-report",
       "source": "./plugins/quad-report",
-      "description": "Builds your monthly Vistage Quad Report one-pager from your own financials and time records.",
-      "version": "1.0.0"
+      "description": "Builds your monthly Vistage Quad Report one-pager from your own financials and time records."
     }
   ]
 }

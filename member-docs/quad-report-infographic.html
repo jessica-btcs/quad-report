@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quad Report Member Guide</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@600;700;800;900&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* One Letter page, print only. Navy band, the data folder as the hub, four
+   tool columns crossed by three stage rows, then the monthly loop and the
+   reconciliation gauge. Colors from the Quad slide. */
+@page { size: 8.5in 11in; margin: 0; }
+:root {
+  --navy: #143355; --navy-2: #1F4A78; --ink: #18202B; --muted: #5A6675;
+  --tint: #ECF1F6; --rule: #D3DCE6; --paper: #FFFFFF;
+  --good: #1A7F45; --watch: #C27A00; --bad: #B42525;
+  --chatgpt: #0E7C6B; --claude: #B5552E; --web: #7A4FA0; --copilot: #2F6FB3;
+  --display: "Libre Franklin", "Franklin Gothic Medium", Arial, sans-serif;
+  --body: "Source Sans 3", "Segoe UI", Calibri, Arial, sans-serif;
+  --mono: "IBM Plex Mono", Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--paper); }
+body {
+  width: 8.5in; height: 11in; overflow: hidden; color: var(--ink);
+  font-family: var(--body); font-size: 10.5px; line-height: 1.32;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  display: grid; grid-template-rows: auto auto auto auto 1fr;
+}
+h1, h2, h3, b.d { font-family: var(--display); }
+code { font-family: var(--mono); font-size: 9.5px; background: var(--tint); color: var(--navy); padding: 1px 4px; border-radius: 3px; white-space: nowrap; }
+
+/* ---------- header ---------- */
+.band { background: var(--navy); color: #fff; padding: 20px 40px 18px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+.kicker { font-family: var(--display); font-weight: 700; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: #9FC0E0; }
+.band h1 { font-size: 34px; font-weight: 900; line-height: 1.02; letter-spacing: -.02em; margin-top: 6px; }
+.band h1 span { color: #8FD0F0; }
+.band p { margin-top: 8px; font-size: 12px; color: #D6E3F0; max-width: 60ch; }
+.quad { display: grid; grid-template-columns: 82px 82px; grid-template-rows: 54px 54px; gap: 4px; }
+.quad div { background: var(--navy-2); border-radius: 3px; padding: 5px 7px; display: flex; flex-direction: column; justify-content: space-between; font-size: 8.5px; line-height: 1.15; color: #C9DAEC; }
+.quad b { font-family: var(--display); font-size: 12px; color: #fff; }
+.quad .mine { background: transparent; border: 1.5px dashed #8FD0F0; color: #8FD0F0; font-weight: 700; }
+.quad .lo { flex-direction: column-reverse; }
+
+/* ---------- hub ---------- */
+.hub { padding: 14px 40px 0; display: grid; justify-items: center; }
+.folder { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; background: var(--tint); border: 2px solid var(--navy); border-radius: 10px; padding: 12px 18px; width: 560px; position: relative; }
+.folder h2 { font-size: 15px; font-weight: 800; color: var(--navy); }
+.folder p { color: var(--muted); font-size: 10px; margin-top: 2px; }
+.files { display: flex; gap: 6px; margin-top: 7px; flex-wrap: wrap; }
+.files span { font-family: var(--mono); font-size: 9px; background: #fff; border: 1px solid var(--rule); border-radius: 3px; padding: 2px 6px; color: var(--navy); }
+.lock { position: absolute; right: -12px; top: -12px; background: var(--good); color: #fff; font-family: var(--display); font-weight: 800; font-size: 8.5px; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border-radius: 99px; }
+.spokes { width: 100%; height: 26px; display: block; }
+
+/* ---------- matrix ---------- */
+.matrix { padding: 0 40px; display: grid; grid-template-columns: 74px repeat(4, 1fr); grid-template-rows: auto auto auto auto; gap: 6px; }
+.toolhead { border-radius: 8px 8px 0 0; color: #fff; padding: 9px 10px 8px; display: grid; gap: 3px; justify-items: start; }
+.toolhead h3 { font-size: 12.5px; white-space: nowrap; font-weight: 800; display: flex; gap: 6px; align-items: center; }
+.toolhead svg { width: 16px; height: 16px; }
+.tag { font-family: var(--display); font-size: 7.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; background: rgba(255,255,255,.2); border-radius: 99px; padding: 2px 7px; }
+.t1 { background: var(--chatgpt); } .t2 { background: var(--claude); } .t3 { background: var(--web); } .t4 { background: var(--copilot); }
+.stage { display: grid; align-content: center; justify-items: center; text-align: center; gap: 5px; color: var(--navy); }
+.stage .ring { width: 38px; height: 38px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; }
+.stage .ring svg { width: 20px; height: 20px; }
+.stage b { font-family: var(--display); font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; line-height: 1.15; }
+.stage small { font-size: 8.5px; color: var(--muted); }
+.cell { border: 1px solid var(--rule); border-radius: 6px; padding: 8px 9px; display: grid; gap: 5px; align-content: start; background: #fff; }
+.c1 { border-top: 3px solid var(--chatgpt); } .c2 { border-top: 3px solid var(--claude); } .c3 { border-top: 3px solid var(--web); } .c4 { border-top: 3px solid var(--copilot); }
+.cell ol { padding-left: 13px; display: grid; gap: 3px; }
+.cell ol li::marker { font-family: var(--display); font-weight: 800; color: var(--muted); font-size: 9px; }
+.auto { display: flex; gap: 7px; align-items: center; }
+.auto .chk { width: 26px; height: 26px; border-radius: 50%; background: var(--good); display: grid; place-items: center; flex: none; }
+.auto .chk svg { width: 14px; height: 14px; }
+.auto b { font-family: var(--display); color: var(--good); font-size: 12px; font-weight: 800; display: block; }
+.manual b { font-family: var(--display); color: var(--navy); font-size: 11px; font-weight: 800; display: block; }
+.fine { font-size: 8.5px; color: var(--muted); border-top: 1px dashed var(--rule); padding-top: 4px; }
+.say { background: var(--navy); color: #fff; border-radius: 8px 8px 8px 2px; padding: 5px 8px; font-weight: 600; font-size: 10px; justify-self: start; }
+
+/* ---------- bottom ---------- */
+.bottom { padding: 14px 40px 0; display: grid; grid-template-columns: 1.35fr 1fr; gap: 22px; }
+.bottom h2 { font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); margin-bottom: 9px; }
+.loop { display: grid; grid-template-columns: 1fr 14px 1fr 14px 1fr 14px 1fr; align-items: stretch; }
+.loop .step { background: var(--tint); border-radius: 6px; padding: 8px 8px; display: grid; gap: 3px; align-content: start; }
+.loop .step b { font-family: var(--display); font-size: 11px; font-weight: 800; color: var(--navy); }
+.loop .step span { font-size: 9px; color: var(--muted); line-height: 1.25; }
+.loop .step.you { background: #fff; border: 1.5px dashed var(--navy); }
+.loop .arr { display: grid; place-items: center; color: var(--navy); }
+.loop .arr svg { width: 10px; height: 10px; }
+.gauge { margin-top: 12px; }
+.bar { display: grid; grid-template-columns: 5fr 10fr 10fr; height: 12px; border-radius: 99px; overflow: hidden; }
+.bar i:nth-child(1) { background: var(--good); } .bar i:nth-child(2) { background: var(--watch); } .bar i:nth-child(3) { background: var(--bad); }
+.ticks { display: grid; grid-template-columns: 5fr 10fr 10fr; margin-top: 2px; font-family: var(--mono); font-size: 8px; color: var(--muted); }
+.ticks span:nth-child(2) { text-align: left; }
+.legend { display: grid; grid-template-columns: 5fr 10fr 10fr; gap: 8px; margin-top: 4px; font-size: 8.8px; line-height: 1.25; }
+.legend b { font-family: var(--display); font-weight: 800; display: block; font-size: 9px; }
+.legend div:nth-child(1) b { color: var(--good); } .legend div:nth-child(2) b { color: var(--watch); } .legend div:nth-child(3) b { color: var(--bad); }
+.gauge-cap { font-size: 9px; color: var(--muted); margin-bottom: 5px; }
+.first { background: var(--tint); border-radius: 8px; padding: 11px 14px; display: grid; gap: 6px; align-content: start; }
+.first .big { font-family: var(--display); font-weight: 900; font-size: 19px; color: var(--navy); line-height: 1; }
+.first .big small { font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: .04em; }
+.first ul { list-style: none; display: grid; gap: 4px; }
+.first li { display: grid; grid-template-columns: 14px 1fr; gap: 6px; }
+.first li::before { content: ""; width: 10px; height: 10px; border: 1.5px solid var(--navy); border-radius: 2px; margin-top: 2px; background: #fff; }
+.first li b { display: block; font-family: var(--display); font-size: 10px; font-weight: 700; color: var(--ink); }
+.first li em { display: block; font-style: normal; font-size: 8.8px; color: var(--muted); line-height: 1.25; }
+.first .tip { font-size: 9px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 6px; }
+
+footer { align-self: end; margin: 10px 40px 16px; padding-top: 9px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 20px; font-size: 8.5px; color: var(--muted); }
+footer b { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div>
+    <p class="kicker">Quad Report · Member guide · v1.0</p>
+    <h1>Set it up once.<br>Run it monthly. <span>Stay current.</span></h1>
+    <p>Your Vistage one-pager, built from your own books. Quadrants i, ii and iii come from your numbers. Quadrant iv is yours to write.</p>
+  </div>
+  <div class="quad" aria-label="The four quadrants">
+    <div class="mine"><b style="color:#8FD0F0">iv</b>What's on my mind. You write it.</div>
+    <div><b>iii</b>How we get there</div>
+    <div class="lo"><b>i</b>How we did</div>
+    <div class="lo"><b>ii</b>This year's goals</div>
+  </div>
+</header>
+
+<section class="hub">
+  <div class="folder">
+    <svg width="46" height="40" viewBox="0 0 46 40" aria-hidden="true"><path d="M2 8a4 4 0 0 1 4-4h11l5 5h18a4 4 0 0 1 4 4v21a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4z" fill="#143355"/><path d="M2 15h42v19a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4z" fill="#1F4A78"/></svg>
+    <div>
+      <h2>Your Quad Report Data folder</h2>
+      <p>Unzip it into your OneDrive, Google Drive or SharePoint. Every tool below reads it. Switch tools and you keep every month.</p>
+      <div class="files"><span>quad-profile.json</span><span>history/2026-09.json</span><span>out/2026-09.pptx</span></div>
+    </div>
+    <span class="lock">Updates never touch it</span>
+  </div>
+  <svg class="spokes" viewBox="0 0 736 34" preserveAspectRatio="none" aria-hidden="true">
+    <g fill="none" stroke-width="2" stroke-dasharray="3 3">
+      <path d="M368 0 V12 H157 V34" stroke="#0E7C6B"/>
+      <path d="M368 0 V12 H316 V34" stroke="#B5552E"/>
+      <path d="M368 0 V12 H475 V34" stroke="#7A4FA0"/>
+      <path d="M368 0 V12 H634 V34" stroke="#2F6FB3"/>
+    </g>
+  </svg>
+</section>
+
+<section class="matrix">
+  <div></div>
+  <div class="toolhead t1"><h3><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.6"><path d="M2 3h12v8H7l-3 3v-3H2z"/></svg>ChatGPT</h3><span class="tag">Full build · easiest</span></div>
+  <div class="toolhead t2"><h3><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.6"><rect x="1.5" y="2.5" width="13" height="9" rx="1"/><path d="M5 14h6M8 11.5V14"/></svg>Claude desktop</h3><span class="tag">Full build</span></div>
+  <div class="toolhead t3"><h3><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4M8 1.8c2 2 2 10.4 0 12.4M8 1.8c-2 2-2 10.4 0 12.4"/></svg>Claude on the web</h3><span class="tag">Full build</span></div>
+  <div class="toolhead t4"><h3><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.6"><rect x="2" y="2" width="5" height="5"/><rect x="9" y="2" width="5" height="5"/><rect x="2" y="9" width="5" height="5"/><rect x="9" y="9" width="5" height="5"/></svg>Copilot</h3><span class="tag">Numbers only</span></div>
+
+  <!-- set up -->
+  <div class="stage"><span class="ring"><svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.8"><path d="M10 3v10M5.5 8.5 10 13l4.5-4.5M3.5 16.5h13"/></svg></span><b>Set up</b><small>once, then the<br>30 min interview</small></div>
+  <div class="cell c1"><ol><li>Sign in to ChatGPT.</li><li>Open the Quad Report GPT link from your welcome email.</li><li>Say <span class="say" style="display:inline-block;padding:1px 6px">set up my quad report</span></li></ol></div>
+  <div class="cell c2"><ol><li>Open <b>Customize</b>, then <b>Plugins</b>.</li><li>Click <b>Add marketplace</b> and paste <code>jessica-btcs/quad-report</code></li><li>Install <b>quad-report</b>.</li><li>Turn on <b>Sync automatically</b>.</li><li>Connect your data folder, then say <span class="say" style="display:inline-block;padding:1px 6px">set up my quad report</span></li></ol><p class="fine">Everyone uses this same address. No GitHub account or copy of your own.</p></div>
+  <div class="cell c3"><ol><li>In <b>Settings &gt; Capabilities</b>, turn on <b>Code execution</b>.</li><li>Download the skill zip from your welcome email.</li><li>Open <b>Customize &gt; Skills</b>, click <b>+</b>, then <b>Upload a skill</b>.</li><li>Say <span class="say" style="display:inline-block;padding:1px 6px">set up my quad report</span></li></ol></div>
+  <div class="cell c4"><ol><li>Download the Copilot pack from your welcome email.</li><li>Create a Copilot agent.</li><li>Paste in the pack's instructions and add its files.</li><li>Say <span class="say" style="display:inline-block;padding:1px 6px">set up my quad report</span></li></ol></div>
+
+  <!-- monthly -->
+  <div class="stage"><span class="ring"><svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="4.5" width="14" height="12" rx="1.5"/><path d="M3 8.5h14M7 2.5v4M13 2.5v4"/></svg></span><b>Every<br>month</b><small>before your meeting</small></div>
+  <div class="cell c1"><span class="say">build my quad for September</span><ol><li>Attach your profile and last month's history file.</li><li>Save what it hands back into your folder.</li></ol></div>
+  <div class="cell c2"><span class="say">build my quad for September</span><ol><li>That's it. It reads and writes your folder directly.</li></ol></div>
+  <div class="cell c3"><span class="say">build my quad for September</span><ol><li>Attach your profile and last month's history file.</li><li>Save what it hands back into your folder.</li></ol></div>
+  <div class="cell c4"><ol><li>Attach your profile and last month's history file.</li><li>Type its numbers into the blank slide template.</li><li>Save the history file it hands back.</li></ol></div>
+
+  <!-- updates -->
+  <div class="stage"><span class="ring"><svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.8"><path d="M16 6.5A6.5 6.5 0 0 0 4 8M4 13.5A6.5 6.5 0 0 0 16 12"/><path d="M16 2.5v4h-4M4 17.5v-4h4"/></svg></span><b>Updates</b><small>new version out</small></div>
+  <div class="cell c1 auto"><span class="chk"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.2"><path d="m2.5 7.5 3 3 6-7"/></svg></span><div><b>Automatic</b>Every new chat runs the latest version.</div></div>
+  <div class="cell c2 auto"><span class="chk"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.2"><path d="m2.5 7.5 3 3 6-7"/></svg></span><div><b>Automatic</b>Once Sync automatically is on. It also tells you when a new version is out.</div></div>
+  <div class="cell c3 manual"><div><b>Swap the zip</b>Upload the new zip from the update email in place of the old one.</div></div>
+  <div class="cell c4 manual"><div><b>Swap the pack</b>Replace the agent's files with the new pack from the update email.</div></div>
+</section>
+
+<section class="bottom">
+  <div>
+    <h2>What happens each month</h2>
+    <div class="loop">
+      <div class="step"><b>Gathers</b><span>Revenue, delivery cost, overhead and cash from your accounts or uploads.</span></div>
+      <div class="arr"><svg viewBox="0 0 10 10"><path d="M2 1l6 4-6 4z" fill="#143355"/></svg></div>
+      <div class="step"><b>Reconciles</b><span>Checks your time records against your books first.</span></div>
+      <div class="arr"><svg viewBox="0 0 10 10"><path d="M2 1l6 4-6 4z" fill="#143355"/></svg></div>
+      <div class="step"><b>Builds</b><span>Quadrants i to iii, with trends and STUCK goals from your history.</span></div>
+      <div class="arr"><svg viewBox="0 0 10 10"><path d="M2 1l6 4-6 4z" fill="#143355"/></svg></div>
+      <div class="step you"><b>You finish</b><span>Write quadrant iv and take it to the meeting.</span></div>
+    </div>
+    <div class="gauge">
+      <p class="gauge-cap">How far your time records and your books can disagree before it stops trusting the margin:</p>
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="ticks"><span>0%</span><span>5%</span><span>15%+</span></div>
+      <div class="legend">
+        <div><b>Builds it</b>Gap printed on the hand-off.</div>
+        <div><b>Builds it, flags it</b>Names the likely cause, usually a missing cost rate.</div>
+        <div><b>Holds back margin</b>Tells you what to fix instead of guessing.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="first">
+    <h2 style="margin:0">Your first run: have these nearby</h2>
+    <p class="big">20–40 <small>MINUTES · SAVES AS IT GOES</small></p>
+    <ul>
+      <li><span><b>P&amp;L by month, last 12 months, accrual basis</b><em>Or connect your accounting system. A column per month.</em></span></li>
+      <li><span><b>Balance sheet as of last month end</b><em>For your cash reserve.</em></span></li>
+      <li><span><b>Your time or job costing system</b><em>Hours by person, by job, with a cost rate: Harvest, BigTime, Procore, ServiceTitan, QuickBooks Time. Optional; it makes margin real.</em></span></li>
+      <li><span><b>Your annual planning deck</b><em>So your goals go in word for word.</em></span></li>
+    </ul>
+    <p class="tip">Expect a finding. The usual one: salaried delivery time in operating expenses, which flatters gross margin.</p>
+  </div>
+</section>
+
+<footer>
+  <span><b>Your numbers stay yours.</b> They live in your own accounts and your own folder. Nobody who shared this with you can see them.</span>
+  <span>Quad Report format © Sherpa Alliance, 2004, used with permission.</span>
+</footer>
+
+</body>
+</html>

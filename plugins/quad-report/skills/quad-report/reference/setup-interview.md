@@ -15,6 +15,23 @@ Ask these in small batches, not as a wall. **Save the profile after every
 batch.** Owners get pulled away; the next chat picks up where this one
 stopped, because `quad_data.py status` lists what is still missing.
 
+## What to ask them to bring
+
+If nothing is connected, ask for these exports. Name them exactly; "a recent
+P&L" gets you one 12-month total, which is useless for trends.
+
+- **Profit and loss, by month, last 12 months, accrual basis.** One column
+  per month. If their fiscal year started recently, prior year plus year to
+  date. Cash basis puts revenue in the month the money landed; say so on the
+  hand-off if that is all they have.
+- **Balance sheet as of the last month end**, for the cash line.
+- **Sales by customer, by month, accrual**, parent customers only if their
+  system has sub-jobs. Optional; it shows concentration.
+- **A time export**: person, date, hours, project, and cost per entry, for
+  the same 12 months. Optional; it is the difference between tier 1 and 2.
+- **Their billing tracker**, if they keep one.
+- **Their annual planning deck.**
+
 ## Company
 
 - Company name, who reports, fiscal year start.
@@ -43,7 +60,13 @@ tracker, the SOWs, or nowhere yet.
 
 ## Time
 
-- Where hours live, if anywhere.
+- Where hours live, if anywhere. Examples to offer if they are unsure what
+  counts: services firms use Harvest, Toggl Track, Clockify, BigTime, Kantata
+  or Productive; construction and trades use Procore, Buildertrend, JobTread,
+  Knowify or Foundation; field service uses ServiceTitan, Jobber or Housecall
+  Pro; job shops use JobBOSS, ProShop or their ERP's job costing; some run it
+  inside QuickBooks Online Projects or QuickBooks Time. Payroll hours alone
+  still help.
 - **Are cost rates set for every person and every project?** Run the zero-rate
   audit at the end of setup and show them what is missing. This is usually the
   first real value the skill delivers.

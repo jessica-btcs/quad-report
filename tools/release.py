@@ -66,8 +66,7 @@ def sync_versions(version, rel):
     p = json.loads(rd(pj)); p["version"] = version; wr(pj, json.dumps(p, indent=2) + "\n")
     m = json.loads(rd(mj))
     for pl in m["plugins"]:
-        if pl["name"] == "quad-report":
-            pl["version"] = version
+        pl.pop("version", None)  # plugin.json carries the version; Claude's docs say set it in one place
     wr(mj, json.dumps(m, indent=2) + "\n")
     url_file = os.path.join(SKILL, "update-url.txt")
     if rel.get("github_repo"):

@@ -1,6 +1,6 @@
 ---
 name: quad-report
-description: Builds the monthly Vistage Quad Report one-pager from the owner's own financials and time records. Use when the owner says "quad report", "quad", "build my quad", "Vistage one-pager", or asks to prepare for their Vistage or peer-group meeting. Runs a setup interview on first use, reconciles the books against the time system before trusting any number, builds quadrants i, ii and iii from data, and deliberately leaves quadrant iv blank for the owner to write.
+description: Builds the monthly Vistage Quad Report one-pager from the owner's own financials and time records. Use when the owner says "quad report", "quad", "build my quad", "set up my quad report", "Vistage one-pager", or asks to prepare for their Vistage or peer-group meeting. Runs a setup interview on first use, reconciles the books against the time system before trusting any number, builds quadrants i, ii and iii from data, and deliberately leaves quadrant iv blank for the owner to write.
 ---
 
 # Quad Report

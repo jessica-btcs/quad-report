@@ -17,21 +17,34 @@ the rest of your drive.
 ## 2. Open the Quad Report in the AI you use
 
 - **ChatGPT:** open the Quad Report GPT link from the email. That's it.
-- **Claude desktop:** in Claude, open plugin settings, add the marketplace
-  address from the email, and install **quad-report**. Then connect your
-  Quad Report Data folder when it asks.
-- **Claude on the web:** download the skill zip from the email and upload it
-  in Settings, under skills.
+- **Claude desktop:** open **Customize**, then **Plugins**. Click **Add
+  marketplace** and paste `jessica-btcs/quad-report`. Everyone uses this same
+  address; you don't need a GitHub account or a copy of your own. Install
+  **quad-report**, then turn on **Sync automatically** for that marketplace so
+  updates arrive on their own. Connect your Quad Report Data folder when it
+  asks.
+- **Claude on the web:** in **Settings > Capabilities**, turn on code
+  execution. Download the skill zip from the email, then open **Customize >
+  Skills**, click **+** and choose **Upload a skill**.
 - **Microsoft Copilot:** Copilot can do the interview and the numbers but
   not the slide. Use the Copilot pack from the email, or use ChatGPT or Claude
   for the full build.
 
-## 3. Say "build my quad report"
+## 3. Say "set up my quad report"
 
 The first time, it shows you a sample slide and then runs a setup interview,
 20 to 40 minutes. It saves as it goes, so you can stop and pick it up later.
-Have these nearby: access to your accounting system or a recent P&L, your
-time or job costing system if you have one, and your annual planning deck.
+Have these nearby:
+
+- **Your P&L by month for the last 12 months, accrual basis**, or access to
+  your accounting system. One column per month, not one 12-month total.
+- **Your balance sheet as of last month's end**, for the cash reserve.
+- **Your time or job costing system**, if you have one: anything that records
+  hours by person, by job, with a cost per hour. Harvest, Toggl, BigTime,
+  Procore, Buildertrend, ServiceTitan, Jobber, QuickBooks Time, or the job
+  costing in your ERP. Optional, but it is what makes gross margin real.
+- **Sales by customer, by month**, if it is easy to pull.
+- **Your annual planning deck**, so your goals go in word for word.
 
 Expect it to find something in your books on the first run. The most common
 one is salaried delivery time sitting in operating expenses, which makes gross
@@ -46,7 +59,8 @@ yourself and take it to the meeting.
 
 ## Updates
 
-On ChatGPT and Claude desktop, updates arrive on their own. On Claude on the
+On ChatGPT, updates arrive on their own. On Claude desktop they do too, once
+Sync automatically is on. On Claude on the
 web and Copilot, you'll get an email with the new file. Your Quad Report Data
 folder is never touched by an update.
 
