@@ -1,4 +1,4 @@
 {
-  "version": "1.0.2",
-  "notes": "ChatGPT is retiring custom GPTs, so on ChatGPT the Quad Report now lives in a Project you set up once from the ChatGPT pack. It stays private to your account. On the ChatGPT desktop app you can install it as a plugin instead, and it updates from the source like the Claude version."
+  "version": "1.0.3",
+  "notes": "Fixed: when asked for a change, the AI could build its own slide and put the quadrants back in normal reading order. The slide now always comes from the Quad Report's own builder, in Scot's layout, and changes are made by rebuilding it."
 }

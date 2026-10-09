@@ -3,6 +3,21 @@
 Written for the owner, not for developers. Each entry says what changed and
 whether they need to do anything.
 
+## 1.0.3
+
+- Fixed: when asked for a change, the AI could build its own slide and put
+  the quadrants back in normal reading order. The slide now always comes from
+  the Quad Report's own builder, in Scot's layout, and changes are made by
+  rebuilding it.
+- New monthly check-in: before the slide is built, it asks one question at a
+  time about what's behind your numbers, where each goal stands, what went
+  well, what didn't, how each core strategy is moving, and what you want from
+  the group. Answer out loud if you like; it
+  trims your words to fit and reads them back before building. You can also
+  dictate quadrant iv, and it types it in word for word.
+- If you use ChatGPT: replace your Project's files and instructions with the
+  new pack.
+
 ## 1.0.2
 
 - ChatGPT is retiring custom GPTs, so on ChatGPT the Quad Report now lives

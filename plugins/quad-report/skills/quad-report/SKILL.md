@@ -70,14 +70,21 @@ on them.
 3. **Reconcile, then decide whether to proceed.** See "The trust gate" below.
 4. **Compute** the KPIs exactly as the profile defines them. Never redefine a
    metric mid-year.
-5. **Write the config** (`quad-config.schema.json`), with `period` like
+5. **Monthly check-in. Never skip it.** Follow `reference/monthly-checkin.md`:
+   one question at a time, made for answering out loud, covering what is
+   behind the KPIs, each goal, what went well, what didn't, the process line,
+   each core strategy, and topics for the group. Quadrant iii, the goal
+   updates and any explanation on a KPI come from these answers and nowhere
+   else. Read the condensed answers back and build only after the owner says
+   they are right.
+6. **Write the config** (`quad-config.schema.json`), with `period` like
    "September 2026", then run
    `python3 quad_data.py annotate <data_dir> config.json`. It sets trend
    direction and STUCK flags from history. Do not set those by eye.
-6. **Build** with
+7. **Build** with
    `python3 build_quad.py config.json <data_dir>/out/YYYY-MM.pptx`.
-7. **Leave quadrant iv empty.** It renders with blank writing lines. Do not
-   fill it, do not draft it, do not offer a shortlist.
+   Quadrant iv renders with blank writing lines unless the owner dictated
+   their own words in the check-in.
 8. **QC.** Recompute every KPI from source and diff it against the config
    before handing anything over. Report the diff.
 9. **Archive** with
@@ -92,10 +99,29 @@ on them.
 
 ## Hard rules
 
+**The slide comes from `build_quad.py` and nothing else.** Never draw the
+slide yourself, never write your own python-pptx code for it, and never edit
+the .pptx after the script has built it. Any change the owner asks for, a
+number, a word, a label, goes into the config and the script runs again. If
+the script will not run, say so and fix that; do not hand over a slide you
+made another way.
+
+**The quadrant layout is correct as built. Do not rearrange it.** iv is top
+left, iii top right, i bottom left, ii bottom right, with the headings on the
+outer edge of the page. It looks out of order next to a normal reading grid
+and that is on purpose: Scot Dietz's original spirals counter-clockwise from
+the bottom left. Moving i and ii to the top, renumbering, or putting headings
+at the top of every panel is a mistake, even when it looks tidier.
+
 **Quadrant iv is the owner's.** Their worries are not derivable from their
 financials. Generating it produces plausible sentences that aren't theirs, and
 a peer group can tell. Even offering a shortlist anchors them. Put the headings
-on the page and stop.
+on the page and stop. The one exception: if the owner dictates quadrant iv
+themselves, type in their words, trimmed only to fit.
+
+**Never invent a win, a shortfall or a strategy update.** Quadrant iii is
+what the owner told you in the check-in, condensed. A question they skipped
+stays blank on the slide.
 
 **Never invent a target or a goal.** Ask. If the owner has a planning deck,
 lift the goals verbatim; do not paraphrase them into something tidier.
@@ -160,6 +186,7 @@ note says which.
   reconciliation. Read this before computing.
 - `reference/setup-interview.md`: the first-run interview.
 - `reference/layout.md`: the Sherpa layout and both label sets.
+- `reference/monthly-checkin.md`: the questions behind quadrant iii, every month.
 - `reference/updating.md`: how an owner gets a new version on each platform.
 - `examples/`: a sample config and its rendered slide. Build it first to see
   the output before connecting anything.

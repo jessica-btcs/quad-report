@@ -187,7 +187,29 @@ def main():
     zip_dir(pairs, os.path.join(dist, "member", "Quad-Report-Data-starter.zip"), "Quad Report Data")
     shutil.copy(os.path.join(ROOT, "member-docs", "QUICKSTART.md"), os.path.join(dist, "member"))
 
+    # Copilot pack as one zip, so it can sit in the shared folder.
+    cp = os.path.join(dist, "copilot")
+    zip_dir([(os.path.join(b, f), os.path.relpath(os.path.join(b, f), cp)) for b, _, fs in os.walk(cp) for f in fs],
+            os.path.join(dist, f"Quad-Report-Copilot-v{version}.zip"), "Quad Report for Copilot")
+
     wr(os.path.join(dist, "RELEASE-NOTES.md"), f"# Quad Report {version}\n\n{notes}\n")
+
+    # share/ is the folder members get a link to. Same folder every release, so
+    # the link in the welcome email never changes; only its contents do.
+    share = os.path.join(ROOT, "share")
+    os.makedirs(share, exist_ok=True)
+    for old in os.listdir(share):
+        try:
+            os.remove(os.path.join(share, old))
+        except (PermissionError, IsADirectoryError):
+            print(f"  (could not replace share/{old}; close it and run again)")
+    for src in (os.path.join(ROOT, "member-docs", "Quad-Report-Member-Guide.pdf"),
+                os.path.join(dist, "member", "Quad-Report-Data-starter.zip"),
+                os.path.join(dist, "chatgpt", f"Quad-Report-ChatGPT-v{version}.zip"),
+                os.path.join(dist, "claude-ai", f"quad-report-skill-v{version}.zip"),
+                os.path.join(dist, f"Quad-Report-Copilot-v{version}.zip"),
+                os.path.join(dist, "RELEASE-NOTES.md")):
+        shutil.copy(src, share)
     if url:
         first_item = notes.split("\n- ")[0].lstrip("- ")
         wr(os.path.join(ROOT, "version.json"),
