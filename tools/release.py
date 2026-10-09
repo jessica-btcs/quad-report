@@ -137,6 +137,8 @@ def main():
         os.makedirs(k)
         for full, rel_path in files:
             name = os.path.basename(rel_path)
+            if name == "VERSION":
+                name = "VERSION.txt"  # ChatGPT and Copilot reject files with no extension
             if os.path.exists(os.path.join(k, name)):
                 die(f"two skill files are both called {name}; the flat {plat} knowledge folder needs unique names")
             shutil.copy(full, os.path.join(k, name))
