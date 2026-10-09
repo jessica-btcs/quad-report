@@ -43,6 +43,8 @@ Then run `python3 quad_data.py status <data_dir> --check-updates` and act on
 what it says:
 
 - `python_pptx: false` → install it (`pip install python-pptx`) before going on.
+  `python_docx: false` matters only for issue forms; install `python-docx`
+  when they ask for one.
 - `profile_found: false` → first run. Go to `reference/setup-interview.md`.
   Run `quad_data.py init <data_dir>` first so the folder exists.
 - `needs_migration: true` → this skill is newer than their profile. Ask only
@@ -53,6 +55,11 @@ what it says:
   run: a newer version is out, and how to get it on their platform (see
   `reference/updating.md`). Never block the run on it.
 - `suggested_period` → the month to offer when they did not name one.
+- `annual_review_due: true` → a new fiscal year has started (or the plan was
+  never dated). Before the monthly check-in, run the annual review in
+  `reference/setup-interview.md`: theme, goals, core strategies and KPI
+  targets, each confirmed or replaced. Never carry them into a new year
+  without asking.
 
 **If you could not write to their folder,** finish by handing them every file
 that changed (the profile, the new history file, the slide) and say exactly
@@ -76,7 +83,9 @@ on them.
    each core strategy, and topics for the group. Quadrant iii, the goal
    updates and any explanation on a KPI come from these answers and nowhere
    else. Read the condensed answers back and build only after the owner says
-   they are right.
+   they are right. If they named topics for the group, ask whether they want
+   to prep an Issue Processing Form; only on a yes, follow
+   `reference/issue-prep.md` once the slide is delivered.
 6. **Write the config** (`quad-config.schema.json`), with `period` like
    "September 2026", then run
    `python3 quad_data.py annotate <data_dir> config.json`. It sets trend
@@ -187,6 +196,9 @@ note says which.
 - `reference/setup-interview.md`: the first-run interview.
 - `reference/layout.md`: the Sherpa layout and both label sets.
 - `reference/monthly-checkin.md`: the questions behind quadrant iii, every month.
+- `reference/issue-prep.md`: filling the owner's own Vistage Issue Processing
+  Form for a topic they want to bring to the group, only when they ask.
+- `fill_issue.py`: fills that form's answer boxes. Needs python-docx.
 - `reference/updating.md`: how an owner gets a new version on each platform.
 - `examples/`: a sample config and its rendered slide. Build it first to see
   the output before connecting anything.

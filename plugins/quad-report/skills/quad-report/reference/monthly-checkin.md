@@ -34,7 +34,10 @@ slide.
    processes?"** One line. (Classic wording: how's it going in building and
    improving processes in your position.)
 4. **Each core strategy, by name: "Did this move this month?"** Moved, stuck,
-   or done, plus a few words if they want. Mark a strategy `stalled` only
+   or done, plus a few words if they want. The strategies themselves are set
+   once a year in the annual review; do not rewrite them here. If the profile
+   has none, stop and ask for them first (setup interview, "Goals and
+   strategies"). Mark a strategy `stalled` only
    when they say it did not move. `quad_data.py annotate` then counts how
    many months it has been stuck.
 5. **Quadrant ii, each goal by name, showing its bullets: "Where does this
@@ -42,7 +45,10 @@ slide.
    line in their words, or keep last month's if nothing changed. A goal they
    say is finished gets `"flag": "done"`.
 6. **"What do you want to ask the group about?"** Up to three short topics
-   for the call-topics line. Optional; blank is fine.
+   for the call-topics line. Optional; blank is fine. If they name any, ask
+   once at the end of the check-in: "Want to prep an Issue Processing Form
+   for any of these?" Only on a yes, follow `issue-prep.md` after the slide
+   is built. Never prep one they did not ask for.
 
 ## Quadrant iv
 

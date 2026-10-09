@@ -83,9 +83,38 @@ show the arithmetic, then let them choose.
 
 ## Goals and strategies
 
-- Their annual goals, **lifted verbatim** from their planning deck if they have
-  one. Ask them to upload it. Do not paraphrase.
-- The core strategies, up to six, phrased as ongoing work.
+These are set once a year. Never skip them; a profile without goals and
+strategies is not finished.
+
+- **Their annual goals, lifted verbatim** from their planning deck if they
+  have one. Ask them to upload it. Do not paraphrase. Up to four, each with a
+  theme and one or two measurable lines, or a single SMART goal.
+- **Their core strategies, up to six.** Ask: "What are the few things you're
+  working on all year that move those goals?" The Quad states each one as an
+  action ending in "-ing" (the classic heading is "Core Strategies: Actions
+  Ending in 'ing'"): "Hiring and certifying crew leads," "Closing the books
+  by the 5th." If they answer with nouns or goals ("crew leads," "faster
+  close"), offer the "-ing" version in their own words and let them approve
+  or change it. Each fits in 40 characters. Do not invent a strategy they did
+  not name; fewer than six is fine.
+- **Set `plan_set`** in the profile to the month these were agreed, as
+  YYYY-MM. That is how the next fiscal year knows to ask again.
+
+## Annual review
+
+When `quad_data.py status` says `annual_review_due: true`, run this before
+the monthly check-in. It is the start of a new fiscal year (or the plan was
+never dated).
+
+1. Show this year's theme, goals, core strategies and KPI targets from the
+   profile, and last month's status for each.
+2. Ask, one at a time: **"New theme for the year?"**, **"Your goals for this
+   year?"** (ask for the new planning deck and lift them verbatim), **"Your
+   core strategies for this year?"** (same "-ing" rule, up to six), and **"Your
+   KPI targets for this year, and the basis each is set on?"**
+3. "Keep it" is a fine answer to any of them. Never carry a goal forward
+   silently; confirm each.
+4. Write the answers to the profile and set `plan_set` to this month.
 
 ## Output
 

@@ -10,7 +10,7 @@ The run is not finished until you have handed back every file that changed (quad
 
 The slide comes only from build_quad.py. Never write your own PowerPoint code, never edit the .pptx afterward, and never rearrange the quadrants: iv top left, iii top right, i bottom left, ii bottom right is correct, on purpose. Any change goes into the config and the script runs again.
 
-Every monthly run includes the check-in in monthly-checkin.md: ask one question at a time about what is behind the KPIs, each goal, wins, shortfalls, the process line and each core strategy. The owner will often answer by voice, so expect long answers and condense them yourself. Read the slide's words back before building.
+Every monthly run includes the check-in in monthly-checkin.md: ask one question at a time about what is behind the KPIs, each goal, wins, shortfalls, the process line and each core strategy. The owner will often answer by voice, so expect long answers and condense them yourself. Read the slide's words back before building. If they named topics for the group, ask once whether they want to prep an Issue Processing Form (issue-prep.md); only on a yes. Copy fill_issue.py into /mnt/data/skill/ too; it draws the form, so never ask them for one.
 
 Never fill quadrant iv yourself. Never invent a target, goal or number. Never send their data anywhere. American English. Deliver a .pptx, never a PDF.
 

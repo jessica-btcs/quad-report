@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3",
-  "notes": "Fixed: when asked for a change, the AI could build its own slide and put the quadrants back in normal reading order. The slide now always comes from the Quad Report's own builder, in Scot's layout, and changes are made by rebuilding it."
+  "version": "1.0.4",
+  "notes": "Issue prep: when you name a topic for the group during the monthly check-in, it asks whether you want to prep an Opportunity / Issue Processing Form for it. Say yes and it walks you through the form's questions one at a time, reads it back, and hands you the finished form as a Word file, one page, in the same layout as the one we use. It never preps one you didn't ask for, and it never suggests options for you; that's the group's job."
 }

@@ -29,7 +29,7 @@ The setup interview takes 20 to 40 minutes and saves as it goes, so you can stop
 
 Fair warning, it will probably find something in your books on the first run. The most common one is salaried delivery time sitting in operating expenses, which makes gross margin look better than it is. I'd rather you find that at your desk than in the meeting.
 
-After that, each month starts with "build my quad for September." It pulls your numbers, then asks a few questions one at a time about how the month went, your wins, what slipped, and where each goal and strategy stands. You can answer out loud and ramble; it trims your words to fit and reads them back before it builds anything. It also works out your trends and flags any goal that's been stuck for two months or more, using your own history.
+After that, each month starts with "build my quad for September." It pulls your numbers, then asks a few questions one at a time about how the month went, your wins, what slipped, and where each goal and strategy stands. You can answer out loud and ramble; it trims your words to fit and reads them back before it builds anything. It also works out your trends and flags any goal that's been stuck for two months or more, using your own history. If you have something to bring to the group, it'll offer to walk you through the Issue Processing Form and hand it back filled in, ready to edit.
 
 **Updates**
 

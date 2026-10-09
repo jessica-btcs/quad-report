@@ -7,7 +7,7 @@ in an update ever touches it. This script is the only thing that writes
 history, so the rules live in one place.
 
     python3 quad_data.py init     <data_dir>
-    python3 quad_data.py status   <data_dir> [--check-updates]
+    python3 quad_data.py status   <data_dir> [--check-updates] [--period YYYY-MM]
     python3 quad_data.py annotate <data_dir> <config.json>
     python3 quad_data.py archive  <data_dir> <config.json> [--run run.json] [--replace]
 
@@ -39,6 +39,8 @@ MIGRATIONS = {
         ("books.salaried_delivery_in", "Where does salaried delivery pay sit: cost of sales or operating expenses?"),
         ("time_system.platform",       "Where do hours live, or 'none'?"),
         ("kpis",                       "Your KPIs, each with a target and the basis it was set on."),
+        ("goals",                      "Your goals for this year, word for word from your planning deck."),
+        ("strategies",                 "Your core strategies, up to six, each an action ending in -ing."),
         ("output.labels",              "Plain English or the classic wording?"),
         ("output.period",              "Report the month or a rolling quarter?"),
     ],
@@ -116,7 +118,7 @@ def next_month(key):
 
 def cmd_init(data_dir):
     made = []
-    for sub in ("", "history", "out"):
+    for sub in ("", "history", "out", "issues", "templates"):
         p = os.path.join(data_dir, sub)
         if not os.path.isdir(p):
             os.makedirs(p)
@@ -128,13 +130,31 @@ def cmd_init(data_dir):
     out({"ok": True, "data_dir": os.path.abspath(data_dir), "created": made})
 
 
-def cmd_status(data_dir, check_updates=False):
+def annual_review_due(prof, period):
+    """Goals, core strategies, theme and KPI targets are set once a year. Due
+       when they have never been dated, or were last set before the start of
+       the fiscal year that `period` falls in."""
+    set_on = prof.get("plan_set")
+    if not set_on:
+        return True
+    fsm = get_path(prof, "company.fiscal_year_start_month") or 1
+    y, m = map(int, period.split("-"))
+    fy_start = f"{y if m >= fsm else y - 1}-{int(fsm):02d}"
+    return set_on < fy_start
+
+
+def cmd_status(data_dir, check_updates=False, period=None):
     res = {"skill_version": skill_version(), "data_dir": os.path.abspath(data_dir)}
     try:
         import pptx  # noqa: F401
         res["python_pptx"] = True
     except ImportError:
         res["python_pptx"] = False
+    try:
+        import docx  # noqa: F401
+        res["python_docx"] = True
+    except ImportError:
+        res["python_docx"] = False
     res["data_dir_exists"] = os.path.isdir(data_dir)
     ppath = os.path.join(data_dir, PROFILE)
     res["profile_found"] = os.path.exists(ppath)
@@ -149,10 +169,18 @@ def cmd_status(data_dir, check_updates=False):
                     missing.append({"field": field, "ask": question})
         res["missing_fields"] = missing
         res["needs_migration"] = v < PROFILE_SCHEMA_VERSION or bool(missing)
+    tdir = os.path.join(data_dir, "templates")
+    res["issue_form"] = None
+    if os.path.isdir(tdir):
+        res["issue_form"] = next((os.path.join(tdir, f) for f in sorted(os.listdir(tdir))
+                                  if f.lower().endswith(".docx") and "issue" in f.lower()), None)
     hist = history(data_dir)
     res["months_on_file"] = [k for k, _ in hist]
     res["last_month"] = hist[-1][0] if hist else None
     res["suggested_period"] = next_month(hist[-1][0]) if hist else None
+    if res["profile_found"]:
+        res["annual_review_due"] = annual_review_due(
+            prof, period or res["suggested_period"] or datetime.now().strftime("%Y-%m"))
     if check_updates:
         res["update"] = update_check()
     out(res)
@@ -297,7 +325,8 @@ def main(argv):
     if cmd == "init":
         cmd_init(data_dir)
     elif cmd == "status":
-        cmd_status(data_dir, "--check-updates" in flags)
+        per = rest[rest.index("--period") + 1] if "--period" in rest else None
+        cmd_status(data_dir, "--check-updates" in flags, per)
     elif cmd == "annotate" and pos:
         cmd_annotate(data_dir, pos[0])
     elif cmd == "archive" and pos:

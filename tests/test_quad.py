@@ -114,5 +114,56 @@ class DataFolder(unittest.TestCase):
         self.assertEqual(data("status", self.dd)["last_month"], "2026-08")
 
 
+class AnnualPlan(unittest.TestCase):
+    def setUp(self):
+        self.d = tempfile.mkdtemp()
+        self.dd = os.path.join(self.d, "Quad Report Data")
+        data("init", self.dd)
+
+    def tearDown(self):
+        shutil.rmtree(self.d)
+
+    def status(self, prof, period):
+        json.dump(prof, open(os.path.join(self.dd, "quad-profile.json"), "w"))
+        return data("status", self.dd, "--period", period)
+
+    def test_strategies_and_goals_are_required(self):
+        fields = [m["field"] for m in self.status({"schema_version": 1}, "2026-09")["missing_fields"]]
+        self.assertIn("strategies", fields)
+        self.assertIn("goals", fields)
+
+    def test_review_due_at_new_fiscal_year_only(self):
+        prof = {"schema_version": 1, "plan_set": "2026-01", "company": {"fiscal_year_start_month": 1}}
+        self.assertFalse(self.status(prof, "2026-09")["annual_review_due"])
+        self.assertTrue(self.status(prof, "2027-01")["annual_review_due"])
+        prof["company"]["fiscal_year_start_month"] = 7
+        self.assertTrue(self.status(prof, "2026-07")["annual_review_due"])
+        self.assertTrue(self.status({"schema_version": 1}, "2026-09")["annual_review_due"])
+
+
+class IssueForm(unittest.TestCase):
+    ISSUE = {"member": "Sample Owner", "meeting_date": "October 15, 2026", "group": "1234",
+             "dollar_value": "$480K", "issue": "Crew leads.", "significant": "Margin.",
+             "ideal_outcome": "Two leads.", "background": ["Started in March"],
+             "options": ["Promote", "Hire"], "direction": "Promote.", "help": ["Options I'm missing?"]}
+
+    def test_drawn_form_has_every_box_and_fills(self):
+        import docx
+        tool = os.path.join(SKILL, "fill_issue.py")
+        with tempfile.TemporaryDirectory() as d:
+            blank, issue, out = (os.path.join(d, n) for n in ("blank.docx", "issue.json", "out.docx"))
+            run(tool, "blank", blank)
+            self.assertTrue(json.loads(run(tool, "check", blank).stdout)["ok"])
+            json.dump(self.ISSUE, open(issue, "w", encoding="utf-8"))
+            r = json.loads(run(tool, "fill", issue, out).stdout)
+            self.assertTrue(r["ok"])
+            self.assertEqual(sorted(r["filled"]), sorted(self.ISSUE))
+            text = " ".join(t.text or "" for t in docx.Document(out).element.body.iter(
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t"))
+            for must in ("Crew leads.", "•  Promote", "OPPORTUNITY / ISSUE PROCESSING FORM"):
+                self.assertIn(must, text)
+            self.assertNotIn("Vistage", text)
+
+
 if __name__ == "__main__":
     unittest.main()

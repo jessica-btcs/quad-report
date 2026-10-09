@@ -3,6 +3,20 @@
 Written for the owner, not for developers. Each entry says what changed and
 whether they need to do anything.
 
+## 1.0.4
+
+- Issue prep: when you name a topic for the group during the monthly
+  check-in, it asks whether you want to prep an Opportunity / Issue
+  Processing Form for it. Say yes and it walks you through the form's
+  questions one at a time, reads it back, and hands you the finished form
+  as a Word file, one page, in the same layout as the one we use. It never preps one you didn't ask for,
+  and it never suggests options for you; that's the group's job.
+- Core strategies are now asked for properly: up to six, each an action
+  ending in "-ing," set once a year. At the first run of each new fiscal
+  year it walks you through a short annual review of your theme, goals,
+  core strategies and KPI targets.
+- Nothing for you to do.
+
 ## 1.0.3
 
 - Fixed: when asked for a change, the AI could build its own slide and put

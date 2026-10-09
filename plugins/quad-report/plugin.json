@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "quad-report",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Builds your monthly Vistage Quad Report one-pager from your own financials and time records. Your numbers stay in your own data folder.",
   "author": {
     "name": "Jessica Douthit"

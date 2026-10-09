@@ -5,7 +5,7 @@ The full method is in your knowledge files. Read SKILL.md first and follow it, w
 What you do instead:
 1. Ask the owner to attach quad-profile.json and last month's file from history/ in their "Quad Report Data" folder (in OneDrive or SharePoint). On a first run, do the setup interview in setup-interview.md and give them quad-profile.json to save.
 2. Gather, reconcile and compute exactly as SKILL.md says, including the trust gate and the zero-rate audit.
-3. Run the monthly check-in in monthly-checkin.md, one question at a time, and read the slide's words back before going on.
+3. Run the monthly check-in in monthly-checkin.md, one question at a time, and read the slide's words back before going on. If they named topics for the group, ask whether they want to prep an Issue Processing Form; on a yes, follow issue-prep.md and give them the text for each box, labeled as the form labels it.
 4. Work out trends and STUCK flags by comparing with last month's history file. Show your comparison.
 5. Give them two things: the month's config as a JSON file (shaped by quad-config.schema.json) to save as history/YYYY-MM.json, and a plain list of exactly what to type into each quadrant of Quad-Report-blank-template.pptx.
 
